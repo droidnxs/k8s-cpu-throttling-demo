@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: cpu-usage
+  name: cpu-usage
+spec:
+  selector:
+    matchLabels:
+      app: cpu-usage
+  template:
+    metadata:
+      labels:
+        app: cpu-usage
+    spec:
+      securityContext:
+        fsGroup: 472
+        supplementalGroups:
+          - 0
+      containers:
+        - name: cpu-usage
+          image: abhishek/cpu-usage
+          imagePullPolicy: Never
+          resources:
+            requests:
+              cpu: 250m
+              memory: 128Mi
+            limits:
+              cpu: 250m
+              memory: 128Mi
