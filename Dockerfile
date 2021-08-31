@@ -6,4 +6,4 @@ RUN apt-get update -y \
 RUN date
 WORKDIR /opt
 COPY cpu-usage.py .
-CMD time python3 cpu-usage.py
+CMD python3 cpu-usage.py

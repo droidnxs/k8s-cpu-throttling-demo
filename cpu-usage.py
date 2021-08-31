@@ -1,38 +1,16 @@
 #!/usr/bin/env python
-"""
-Produces load on all available CPU cores
+import time
 
-Updated with suggestion to prevent Zombie processes
-Linted for Python 3
-Source: 
-insaner @ https://danielflannery.ie/simulate-cpu-load-with-python/#comment-34130
-"""
-from multiprocessing import Pool
-from multiprocessing import cpu_count
+def recursiveFib(n):
+    if n == 1 or n == 2:
+        return 1
 
-import signal
+    return recursiveFib(n - 1) + recursiveFib(n - 2)
 
-stop_loop = 0
-
-
-def exit_chld(x, y):
-    global stop_loop
-    stop_loop = 1
-
-
-def f(x):
-    global stop_loop
-    while not stop_loop:
-        x*x
-
-
-signal.signal(signal.SIGINT, exit_chld)
 
 if __name__ == '__main__':
-    processes = cpu_count()
-    print('-' * 20)
-    print('Running load on CPU(s)')
-    print('Utilizing %d cores' % processes)
-    print('-' * 20)
-    pool = Pool(processes)
-    pool.map(f, range(processes))
+    while True:
+        start = time.perf_counter()
+        recursiveFib(35)
+        end = time.perf_counter()
+        print(f"Took {end - start:0.4f} seconds")
