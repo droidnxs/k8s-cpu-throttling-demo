@@ -1,4 +1,4 @@
-# Example Setup to Simulate CPU Throttling in Kubernetes and See the Effects in Action
+# Example setup to simulate CPU throttling in Kubernetes
 This setup runs a small CPU load generator using 25 iterations of recursive fibonacci per loop.
 
 ## Pre-requisites
