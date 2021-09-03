@@ -11,6 +11,6 @@ def recursiveFib(n):
 if __name__ == '__main__':
     while True:
         start = time.perf_counter()
-        recursiveFib(35)
+        recursiveFib(25)
         end = time.perf_counter()
         print(f"Took {end - start:0.4f} seconds")
