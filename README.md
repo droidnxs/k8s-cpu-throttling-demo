@@ -29,7 +29,7 @@ This setup runs a small CPU load generator using 25 iterations of recursive fibo
 * In the default setup (master), the CPU limits and requests are set to 250 millicores. Depending on available resources, you should be able to see each iteration take longer and behave inconsistently. This is due to excessive CPU throttling, and it can be visualized using the following query in the Prometheus UI: 
 `container_cpu_cfs_throttled_seconds_total{pod=~"cpu-usage-.*", container="cpu-usage", id=~"/docker/.*"}`
 * The app also logs a message to the console and can be checked using `kubectl logs -f <pod-name>`
-* Once you've run this setup for a brief period of time to see the throttling in action, you can now edit the deployment to remove CPU limits and let it run as a burstable QoS type. Run this command, and it should popup a text editor where you can live-edit the deployment's yaml file (remove limits.cpu):
+* Once you've run this setup for a brief period of time to see the throttling in action, you can now edit the deployment to remove CPU limits and let it run as a [burstable QoS type](https://kubernetes.io/docs/tasks/configure-pod-container/quality-service-pod/#create-a-pod-that-gets-assigned-a-qos-class-of-burstable). Run this command, and it should popup a text editor where you can live-edit the deployment's yaml file (remove limits.cpu):
 `kubectl edit deployment cpu-usage`
-* Although you wouldn't see throttle periods / seconds tracked anymore (because throttling is inapplicable in a burstable QoS type), you should be able to see the app's logs and determine each iteration takes far less time, and show little to now spikes in processing time.
+* Although you wouldn't see throttle periods / seconds tracked anymore (because throttling is inapplicable in a burstable QoS type), you should be able to see the app's logs and determine each iteration takes far less time, and show little to no spikes in processing time.
 
